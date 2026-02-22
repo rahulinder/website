@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2765853563594692"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2765853563594692"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="bits-std" content="true">
     <title>Rahulinder Singh Sidhu</title>
 
     <link rel="icon" type="image/png" href="https://img.icons8.com/color/150/full-moon.png">
@@ -14,9 +15,8 @@
     <link href="https://fonts.cdnfonts.com/css/niagara-engraved" rel="stylesheet">
 
     <style>
-        /* General Reset */
         body {
-            background-color: #faf0ca; /* UPDATED BACKGROUND COLOR */
+            background-color: #faf0ca;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -31,7 +31,28 @@
             position: relative;
         }
 
-        /* --- HEADER STYLING --- */
+        #magnet-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
+            pointer-events: none;
+        }
+
+        .magnet-line {
+            width: 20px;
+            height: 2px;
+            background-color: rgba(0, 29, 61, 0.2);
+            place-self: center;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
         header {
             width: 100%;
             height: 125px;
@@ -67,7 +88,6 @@
             letter-spacing: 2px;
         }
 
-        /* --- MAIN CONTENT AREA --- */
         main {
             flex: 1;
             display: flex;
@@ -80,7 +100,6 @@
             padding: 20px;
         }
 
-        /* Name Wrapper */
         .name-wrapper {
             position: relative;
             display: inline-block;
@@ -94,7 +113,6 @@
             cursor: grabbing;
         }
 
-        /* --- NAME ANIMATION (Reveal Effect) --- */
         @keyframes writeNameReveal {
             0% { clip-path: inset(0 100% 0 0); }
             100% { clip-path: inset(0 0 0 0); }
@@ -143,7 +161,6 @@
             pointer-events: none;
         }
 
-        /* Interaction States */
         .name-wrapper:hover .main-name {
             transform: scale(1.15);
             text-shadow: 0 10px 20px rgba(0, 29, 61, 0.2);
@@ -169,7 +186,6 @@
             opacity: 0;
         }
 
-        /* --- ABOUT ME SECTION STYLES --- */
         .about-section {
             max-width: 600px;
             color: #001d3d;
@@ -196,7 +212,6 @@
             line-height: 1.6;
         }
 
-        /* Footer Area */
         .footer-container {
             padding: 40px;
             text-align: center;
@@ -227,7 +242,6 @@
             opacity: 1;
         }
 
-        /* Ripple Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -245,7 +259,6 @@
             }
         }
 
-        /* Dropdown Menu */
         .dropdown-menu {
             position: fixed;
             top: 125px;
@@ -273,7 +286,7 @@
             padding: 15px 0;
             text-decoration: none;
             font-size: 1.5rem;
-            color: #caf0f8; /* Light blue text */
+            color: #caf0f8;
             display: block;
             transition: 0.3s;
             font-weight: 500;
@@ -318,6 +331,8 @@
 </head>
 <body>
 
+    <div id="magnet-container"></div>
+
     <header>
         <div class="logo-container" onclick="toggleMenu()">
             <div class="logo">R</div>
@@ -337,7 +352,6 @@
                 Student at Thapar Institute of Engineering and Technology, Patiala.
             </p>
         </div>
-
     </main>
 
     <div class="footer-container">
@@ -364,7 +378,36 @@
     </div>
 
     <script>
-        // --- RIPPLE EFFECT ---
+        const magnetContainer = document.getElementById('magnet-container');
+
+        function initMagnetLines() {
+            magnetContainer.innerHTML = '';
+            const cols = Math.floor(window.innerWidth / 40);
+            const rows = Math.floor(window.innerHeight / 40);
+            const totalLines = cols * rows;
+
+            for (let i = 0; i < totalLines; i++) {
+                const line = document.createElement('div');
+                line.className = 'magnet-line';
+                magnetContainer.appendChild(line);
+            }
+        }
+
+        initMagnetLines();
+
+        window.addEventListener('resize', initMagnetLines);
+
+        window.addEventListener('mousemove', (e) => {
+            const lines = document.getElementsByClassName('magnet-line');
+            for (let i = 0; i < lines.length; i++) {
+                const rect = lines[i].getBoundingClientRect();
+                const lineX = rect.left + rect.width / 2;
+                const lineY = rect.top + rect.height / 2;
+                const angle = Math.atan2(e.clientY - lineY, e.clientX - lineX);
+                lines[i].style.transform = `rotate(${angle}rad)`;
+            }
+        });
+
         window.addEventListener('click', function(e) {
             if (e.target.closest('header')) return;
             const ripple = document.createElement('div');
@@ -378,7 +421,6 @@
             setTimeout(() => { ripple.remove(); }, 800);
         });
 
-        // --- MENU FUNCTIONS ---
         function toggleMenu() {
             const menu = document.getElementById("myDropdown");
             const overlay = document.getElementById("overlay");
@@ -390,7 +432,6 @@
             }
         }
 
-        // --- DRAG & DROP LOGIC ---
         const draggable = document.getElementById('dragName');
         let isDragging = false;
         let startX, startY;
@@ -425,7 +466,6 @@
             }
         });
 
-        // --- HI ANIMATION TRIGGER ---
         function triggerHiAnimation() {
             draggable.classList.add("active");
             setTimeout(() => {
@@ -433,6 +473,5 @@
             }, 1500);
         }
     </script>
-
 </body>
 </html>
