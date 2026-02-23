@@ -216,21 +216,6 @@
             height: 65px;
             opacity: 0.9;
         }
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: ripple-animation 0.8s linear;
-            pointer-events: none;
-            z-index: 0; 
-        }
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
         .dropdown-menu {
             position: fixed;
             top: 125px;
@@ -342,15 +327,44 @@
     <script>
         window.addEventListener('click', function(e) {
             if (e.target.closest('header') || e.target.closest('.dock')) return;
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            document.body.appendChild(ripple);
-            const size = 100;
-            ripple.style.width = size + 'px';
-            ripple.style.height = size + 'px';
-            ripple.style.left = (e.clientX - size/2) + 'px';
-            ripple.style.top = (e.clientY - size/2) + 'px';
-            setTimeout(() => { ripple.remove(); }, 800);
+
+            const size = 60;
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', '0 0 100 100');
+            svg.style.position = 'fixed';
+            svg.style.left = `${e.clientX - size/2}px`;
+            svg.style.top = `${e.clientY - size/2}px`;
+            svg.style.width = `${size}px`;
+            svg.style.height = `${size}px`;
+            svg.style.pointerEvents = 'none';
+            svg.style.zIndex = '9999';
+
+            const numLines = 8;
+            for (let i = 0; i < numLines; i++) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                const angle = (Math.PI * 2 * i) / numLines;
+                line.setAttribute('x1', 50 + Math.cos(angle) * 10);
+                line.setAttribute('y1', 50 + Math.sin(angle) * 10);
+                line.setAttribute('x2', 50 + Math.cos(angle) * 40);
+                line.setAttribute('y2', 50 + Math.sin(angle) * 40);
+                line.setAttribute('stroke', '#001d3d');
+                line.setAttribute('stroke-width', '4');
+                line.setAttribute('stroke-linecap', 'round');
+                line.style.strokeDasharray = '30';
+                line.style.strokeDashoffset = '30';
+                
+                line.animate([
+                    { strokeDashoffset: '30' },
+                    { strokeDashoffset: '-30' }
+                ], {
+                    duration: 400,
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                    fill: 'forwards'
+                });
+                svg.appendChild(line);
+            }
+            document.body.appendChild(svg);
+            setTimeout(() => svg.remove(), 400);
         });
 
         function toggleMenu() {
