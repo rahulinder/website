@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2765853563594692"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="bits-std" content="true">
     <title>Rahulinder Singh Sidhu</title>
-
     <link rel="icon" type="image/png" href="https://img.icons8.com/color/150/full-moon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/niagara-engraved" rel="stylesheet">
-
     <style>
         body {
             background-color: #faf0ca;
@@ -30,29 +26,6 @@
             user-select: none;
             position: relative;
         }
-
-        #magnet-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-            grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
-            pointer-events: none;
-        }
-
-        .magnet-line {
-            width: 20px;
-            height: 2px;
-            background-color: rgba(0, 29, 61, 0.2);
-            place-self: center;
-            transition: transform 0.1s ease-out;
-            will-change: transform;
-        }
-
         header {
             width: 100%;
             height: 125px;
@@ -64,7 +37,6 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-
         .logo-container {
             display: flex;
             justify-content: center;
@@ -74,11 +46,9 @@
             z-index: 101; 
             transition: transform 0.3s ease;
         }
-
         .logo-container:hover {
             transform: scale(1.05);
         }
-
         .logo {
             font-family: 'Niagara Engraved', sans-serif;
             font-size: 90px;
@@ -87,7 +57,6 @@
             line-height: 1;
             letter-spacing: 2px;
         }
-
         main {
             flex: 1;
             display: flex;
@@ -99,7 +68,6 @@
             position: relative;
             padding: 20px;
         }
-
         .name-wrapper {
             position: relative;
             display: inline-block;
@@ -108,16 +76,13 @@
             margin-bottom: 30px; 
             z-index: 10; 
         }
-
         .name-wrapper:active {
             cursor: grabbing;
         }
-
         @keyframes writeNameReveal {
             0% { clip-path: inset(0 100% 0 0); }
             100% { clip-path: inset(0 0 0 0); }
         }
-
         h1.main-name {
             font-family: 'Ephesis', cursive;
             font-size: 110px;
@@ -131,7 +96,6 @@
             clip-path: inset(0 100% 0 0);
             animation: writeNameReveal 3s cubic-bezier(0.5, 0, 0.5, 1) forwards;
         }
-
         h1.hi-msg {
             font-family: 'Ephesis', cursive;
             font-size: 110px;
@@ -149,7 +113,6 @@
             opacity: 0;
             width: 100%;
         }
-
         .underline {
             position: absolute;
             left: 50%;
@@ -160,7 +123,6 @@
             transition: width 0.4s ease, left 0.4s ease;
             pointer-events: none;
         }
-
         .name-wrapper:hover .main-name {
             transform: scale(1.15);
             text-shadow: 0 10px 20px rgba(0, 29, 61, 0.2);
@@ -169,23 +131,19 @@
             width: 80%; 
             left: 10%;
         }
-
         .name-wrapper.active .main-name {
             opacity: 0;
             transform: scale(0.5);
             clip-path: inset(0 0 0 0) !important;
         }
-
         .name-wrapper.active .hi-msg {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.2);
         }
-
         .name-wrapper.active .underline {
             width: 0 !important;
             opacity: 0;
         }
-
         .about-section {
             max-width: 600px;
             color: #001d3d;
@@ -194,7 +152,6 @@
             opacity: 1; 
             margin-top: 20px;
         }
-
         .about-title {
             font-weight: 600;
             font-size: 1.2rem;
@@ -205,43 +162,60 @@
             display: inline-block;
             padding-bottom: 5px;
         }
-
         .about-text {
             font-weight: 300;
             font-size: 1rem;
             line-height: 1.6;
         }
-
-        .footer-container {
-            padding: 40px;
-            text-align: center;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .dock-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
         }
-
-        .social-row {
+        .dock {
             display: flex;
-            gap: 40px;
-            justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            gap: 15px;
+            padding: 10px 20px;
+            background-color: rgba(0, 29, 61, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            height: 70px;
+            border: 1px solid rgba(0, 29, 61, 0.2);
         }
-
-        .social-icon img {
-            width: 35px;
-            height: 35px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .dock-icon {
+            width: 50px;
+            height: 50px;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-origin: bottom;
+            cursor: pointer;
             filter: brightness(0) saturate(100%) invert(8%) sepia(35%) saturate(5834%) hue-rotate(204deg) brightness(91%) contrast(106%);
-            image-rendering: -webkit-optimize-contrast;
             opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
         }
-
-        .social-icon:hover img {
-            transform: scale(1.3);
+        .dock-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .dock-icon:hover {
+            width: 80px;
+            height: 80px;
             opacity: 1;
+            margin: 0 10px;
         }
-
+        .dock-icon:has(+ .dock-icon:hover),
+        .dock-icon:hover + .dock-icon {
+            width: 65px;
+            height: 65px;
+            opacity: 0.9;
+        }
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -251,14 +225,12 @@
             pointer-events: none;
             z-index: 0; 
         }
-
         @keyframes ripple-animation {
             to {
                 transform: scale(4);
                 opacity: 0;
             }
         }
-
         .dropdown-menu {
             position: fixed;
             top: 125px;
@@ -277,11 +249,9 @@
             align-items: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-
         .dropdown-menu.open {
             height: 40vh;
         }
-
         .dropdown-menu a {
             padding: 15px 0;
             text-decoration: none;
@@ -293,22 +263,18 @@
             opacity: 0;
             transform: translateY(-20px);
         }
-
         .dropdown-menu.open a {
             opacity: 1;
             transform: translateY(0);
         }
-
         .dropdown-menu.open a:nth-child(1) { transition-delay: 0.1s; }
         .dropdown-menu.open a:nth-child(2) { transition-delay: 0.2s; }
         .dropdown-menu.open a:nth-child(3) { transition-delay: 0.3s; }
         .dropdown-menu.open a:nth-child(4) { transition-delay: 0.4s; }
-
         .dropdown-menu a:hover {
             color: #ffffff;
             transform: scale(1.1) !important;
         }
-
         #overlay {
             position: fixed;
             display: none;
@@ -320,7 +286,6 @@
             z-index: 80;
             backdrop-filter: blur(2px);
         }
-
         @media (max-width: 600px) {
             h1.main-name, h1.hi-msg { font-size: 70px; }
             .logo { font-size: 70px; }
@@ -330,9 +295,6 @@
     </style>
 </head>
 <body>
-
-    <div id="magnet-container"></div>
-
     <header>
         <div class="logo-container" onclick="toggleMenu()">
             <div class="logo">R</div>
@@ -354,15 +316,15 @@
         </div>
     </main>
 
-    <div class="footer-container">
-        <div class="social-row">
-            <a href="mailto:rsidhu_be24@thapar.edu" class="social-icon">
+    <div class="dock-container">
+        <div class="dock">
+            <a href="mailto:rsidhu_be24@thapar.edu" class="dock-icon">
                 <img src="https://img.icons8.com/external-kmg-design-basic-outline-kmg-design/200/external-email-interface-essentials-kmg-design-basic-outline-kmg-design.png" alt="Email">
             </a>
-            <a href="https://www.instagram.com/rahulinder20/" target="_blank" class="social-icon">
+            <a href="https://www.instagram.com/rahulinder20/" target="_blank" class="dock-icon">
                 <img src="https://img.icons8.com/ios/200/instagram-new--v1.png" alt="Instagram">
             </a>
-            <a href="https://www.linkedin.com/in/rahulinder-singh-sidhu-0a52563b1" target="_blank" class="social-icon">
+            <a href="#" target="_blank" class="dock-icon">
                 <img src="https://img.icons8.com/ios/200/linkedin.png" alt="LinkedIn">
             </a>
         </div>
@@ -371,45 +333,15 @@
     <div id="overlay" onclick="toggleMenu()"></div>
 
     <div id="myDropdown" class="dropdown-menu">
-        <a href="https://github.com/rahulinder/DSA" target="_blank">DSA Repository</a>
-        <a href="https://github.com/rahulinder/DAA" target="_blank">DAA Repository</a>
-        <a href="https://github.com/rahulinder/VS" target="_blank">VS Code Config</a>
+        <a href="#" target="_blank">DSA Repository</a>
+        <a href="#" target="_blank">DAA Repository</a>
+        <a href="#" target="_blank">VS Code Config</a>
         <a href="#">First Website Project</a>
     </div>
 
     <script>
-        const magnetContainer = document.getElementById('magnet-container');
-
-        function initMagnetLines() {
-            magnetContainer.innerHTML = '';
-            const cols = Math.floor(window.innerWidth / 40);
-            const rows = Math.floor(window.innerHeight / 40);
-            const totalLines = cols * rows;
-
-            for (let i = 0; i < totalLines; i++) {
-                const line = document.createElement('div');
-                line.className = 'magnet-line';
-                magnetContainer.appendChild(line);
-            }
-        }
-
-        initMagnetLines();
-
-        window.addEventListener('resize', initMagnetLines);
-
-        window.addEventListener('mousemove', (e) => {
-            const lines = document.getElementsByClassName('magnet-line');
-            for (let i = 0; i < lines.length; i++) {
-                const rect = lines[i].getBoundingClientRect();
-                const lineX = rect.left + rect.width / 2;
-                const lineY = rect.top + rect.height / 2;
-                const angle = Math.atan2(e.clientY - lineY, e.clientX - lineX);
-                lines[i].style.transform = `rotate(${angle}rad)`;
-            }
-        });
-
         window.addEventListener('click', function(e) {
-            if (e.target.closest('header')) return;
+            if (e.target.closest('header') || e.target.closest('.dock')) return;
             const ripple = document.createElement('div');
             ripple.classList.add('ripple');
             document.body.appendChild(ripple);
